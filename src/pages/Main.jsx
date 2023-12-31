@@ -2,12 +2,15 @@ import Box from "@mui/material/Box";
 import BackImg from "../assets/img/img5.jpg";
 import { Container, Stack, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+
+  const navigate = useNavigate()
   return (
     <Container
       sx={{
-        backgroundColor: "#FFC47E",
+        backgroundColor: "#EC8F5E",
         // backgroundImage: `url(${BackImg})`,
         height: "100vh",
         // backgroundSize: "cover",
@@ -38,8 +41,8 @@ const Main = () => {
         </Typography>
       </Stack>
       <Stack flexDirection={"row"} gap={"2rem"}>
-        <Button variant="contained">SİGN İN</Button>
-        <Button variant="outlined">REGİSTER</Button>
+        <Button onClick={()=>navigate("/login")} variant="contained">SİGN İN</Button>
+        <Button onClick={()=>navigate("/register")}  variant="outlined">SİGN UP</Button>
       </Stack>
     </Container>
   );
