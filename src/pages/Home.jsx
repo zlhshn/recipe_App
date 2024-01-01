@@ -1,97 +1,142 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { Grid, Stack } from "@mui/material";
+import { FormControl, Grid, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
-import { SetMeal } from "@mui/icons-material";
+import Pagination from '@mui/material/Pagination';
+
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
-  const [meal,setMeal] = useState("")
+  const [meal, setMeal] = useState("breakfast");
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [nextPageLink, setNextPageLink] = useState(null);
 
   const API_ID = process.env.REACT_APP_API_ID;
   const API_KEY = process.env.REACT_APP_API_KEY;
- 
-
-  const URL = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}`;
 
   const searchFood = async () => {
-    try {
-      const res = await axios(URL);
-      setRecipes(res.data.hits);
+    let requestUrl = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}&from=${(currentPage - 1) * 10}&to=${currentPage * 10}&count=${nextPageLink}`;
     
+    try {
+      const res = await axios(requestUrl);
+      setRecipes(res.data.hits);
+      setTotalPages(Math.ceil(res.data.count / 10)); 
+     
+      if (res.data._links && res.data._links.next) {
+        setNextPageLink(res.data._links.next.href);
+      } else {
+        setNextPageLink(null);
+      }
+
+      if (currentPage === totalPages) {
+        setCurrentPage(1);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-
-  useEffect(() => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCurrentPage(1);
+    setRecipes([]);
     searchFood();
-  });
+  };
+
+  const handlePageChange = (event, value) => {
+
+  
+    setCurrentPage(value);
+    setRecipes([])
+  };
+
+
 
   const mealTy = [
     {
-      value: "breakfast",
-    
+      value: "Breakfast",
     },
     {
-      value: "brunch",
+      value: "Brunch",
     },
     {
-      value: "lunch/dinner",
+      value: "Lunch",
     },
     {
-      value: "snack",
+      value: "Snack",
     },
     {
-      value: "teatime",
-    }
+      value: "Teatime",
+    },
   ];
+
+  useEffect(() => {
+    searchFood();
+  }, [ currentPage]);
 
   return (
     <>
-      <Stack
-        flexDirection={"row"}
-        gap={"2rem"}
-        margin={"3rem"}
-        justifyContent={"center"}
-      >
-        <div>
-          <TextField
-            id="standard-basic"
-            label="Search"
-            variant="standard"
-            type="search"
-          />
-        </div>
-        <div>
-          <Button variant="outlined">Outlined</Button>
-        </div>
-        <div>
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Select"
-            defaultValue="EUR"
-            helperText="Please select your currency"
-          >
-            {mealTy.map((option) => (
-              <MenuItem key={option.value} value={option.value} onChange={(e)=>setMeal(e.target.value)}>
-                {option.value} 
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
-      </Stack>
+      <form onSubmit={handleSubmit}>
+        <Stack
+          flexDirection={"row"}
+          gap={"2rem"}
+          margin={"3rem"}
+          justifyContent={"center"}
+        >
+          <div>
+            <TextField
+              id="standard-basic"
+              label="Search"
+              variant="standard"
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <div>
+            <Button variant="outlined" type="submit">
+              Outlined
+            </Button>
+          </div>
+          <div>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Select"
+              value={meal}
+              onChange={(e) => setMeal(e.target.value)}
+              helperText="Please select your meal"
+            >
+              {mealTy.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+        </Stack>
 
-      <Grid container>
-        {recipes?.map((data) => (
-          <RecipeCard item key={data.recipe.label}  data={data} />
-        ))}
-      </Grid>
+        <Grid container>
+          {recipes.map((data) => (
+            <RecipeCard key={data.recipe.label} data={data} />
+          ))}
+        </Grid>
+      </form>
+    
+      <Stack spacing={2}>
+        <Pagination
+          count={totalPages}
+          color="secondary"
+          page={currentPage}
+          onChange={handlePageChange}
+        />
+       
+      </Stack>
     </>
   );
 };
