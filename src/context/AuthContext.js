@@ -35,7 +35,7 @@ const AuthContextProvider = ({ children }) => {
   const createUser = async (email, password, displayName) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
-      const userCredential = await createUserWithEmailAndPassword(
+     await createUserWithEmailAndPassword(
         auth,
         email,
         password
@@ -59,17 +59,17 @@ const AuthContextProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
-      const userCredential = await signInWithEmailAndPassword(
+  await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
       // console.log(userCredential);
       navigate("/home");
-      // toastSuccessNotify("Logged in successfully!");
+   alert("Logged in successfully!");
     } catch (error) {
       console.log(error);
-      // toastErrorNotify(error.message);
+      alert(error.message);
     }
   };
 
@@ -94,7 +94,7 @@ const AuthContextProvider = ({ children }) => {
 
   const logOut = () => {
     signOut(auth);
-    // toastSuccessNotify("Logged out successfully");
+   alert("Logged out successfully");
   };
 
   //* https://console.firebase.google.com/
@@ -107,13 +107,13 @@ const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        // console.log(result);
+      
         navigate("/home");
-        // toastSuccessNotify("Logged in successfully");
+        alert("Logged in successfully");
        
       })
       .catch((error) => {
-        // Handle Errors here.
+      
         console.log(error);
       });
   };
@@ -125,7 +125,7 @@ const AuthContextProvider = ({ children }) => {
         // toastSuccessNotify("Please check your email");
       })
       .catch((error) => {
-        // toastErrorNotify(error.message);
+        alert(error.message);
       });
   };
 

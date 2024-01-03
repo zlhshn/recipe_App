@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import  { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
+import { NavLink } from 'react-router-dom';
 
 // function Copyright(props) {
 //   return (
@@ -67,7 +68,7 @@ const handleSubmit = (e) => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: 'url(https://source.unsplash.com/random?food)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -115,10 +116,7 @@ const handleSubmit = (e) => {
                 onChange={handleChange}
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+            
               <Button
                 type="submit"
                 fullWidth
@@ -143,9 +141,9 @@ const handleSubmit = (e) => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <NavLink to="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </NavLink>
                 </Grid>
               </Grid>
               {/* <Copyright sx={{ mt: 5 }} /> */}
