@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,22 +11,55 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useAuthContext } from "../context/AuthContext";
+import { useState } from 'react';
 
+// function Copyright(props) {
+//   return (
+//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
+// // TODO remove, this demo shouldn't need to reset the theme.
 
-
-
-
+// const defaultTheme = createTheme();
 
 export default function Register() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+  const { createUser, signUpProvider } = useAuthContext();
+  const [info, setInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) =>
+  setInfo({ ...info, [e.target.name]: e.target.value });
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const { email, password, firstName, lastName } = info;
+  const displayName = `${firstName} ${lastName}`;
+  createUser(email, password, displayName);
+};
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
 
   return (
 
@@ -55,6 +89,7 @@ export default function Register() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -65,6 +100,7 @@ export default function Register() {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  onChange={handleChange}
                   autoComplete="family-name"
                 />
               </Grid>
@@ -75,6 +111,7 @@ export default function Register() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  onChange={handleChange}
                   autoComplete="email"
                 />
               </Grid>
@@ -86,6 +123,7 @@ export default function Register() {
                   label="Password"
                   type="password"
                   id="password"
+                  onChange={handleChange}
                   autoComplete="new-password"
                 />
               </Grid>
@@ -104,6 +142,15 @@ export default function Register() {
             >
               Sign Up
             </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              onClick={signUpProvider}
+              sx={{ mt: 3, mb: 2 }}
+            >
+             Continue with Google
+            </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
@@ -113,7 +160,7 @@ export default function Register() {
             </Grid>
           </Box>
         </Box>
-      
+        {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
  
   );

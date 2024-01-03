@@ -1,12 +1,13 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import { useAuthContext } from "../context/AuthContext";
 
 const PrivateRouter = () => {
 
-    const user = true
+  const { currentUser } = useAuthContext();
   return (
-   user ? (<><Navbar/> <Outlet/></>) : (<Navigate to= "/login"/>)
+   currentUser ? (<><Navbar/> <Outlet/></>) : (<Navigate to= "/login"/>)
   )
 }
 

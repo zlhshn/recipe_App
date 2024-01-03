@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { FormControl, Grid, Stack } from "@mui/material";
+import { FormControl, Grid, Stack, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
-import Pagination from '@mui/material/Pagination';
-
+import Pagination from "@mui/material/Pagination";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -20,20 +19,22 @@ const Home = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   const searchFood = async () => {
-    let requestUrl = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}&from=${(currentPage - 1) * 10}&to=${currentPage * 10}&count=${nextPageLink}`;
-    
+    let requestUrl = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}&from=${
+      (currentPage - 1) * 10
+    }&to=${currentPage * 10}&count=${nextPageLink}`;
+
     try {
       const res = await axios(requestUrl);
       setRecipes(res.data.hits);
-      setTotalPages(Math.ceil(res.data.count / 10)); 
-     
-      if (res.data._links && res.data._links.next) {
+      setTotalPages(Math.ceil(res.data.count / 10));
+
+      if ( res.data._links.next) {
         setNextPageLink(res.data._links.next.href);
       } else {
         setNextPageLink(null);
       }
 
-      if (currentPage === totalPages) {
+      if (currentPage > totalPages) {
         setCurrentPage(1);
       }
     } catch (error) {
@@ -48,14 +49,10 @@ const Home = () => {
     searchFood();
   };
 
-  const handlePageChange = (event, value) => {
-
-  
+  const handlePageChange = (value) => {
     setCurrentPage(value);
-    setRecipes([])
+    setRecipes([]);
   };
-
-
 
   const mealTy = [
     {
@@ -77,7 +74,7 @@ const Home = () => {
 
   useEffect(() => {
     searchFood();
-  }, [ currentPage]);
+  }, [currentPage]);
 
   return (
     <>
@@ -114,7 +111,7 @@ const Home = () => {
             >
               {mealTy.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
-                  {option.value}
+                  <Typography>{option.value}</Typography>
                 </MenuItem>
               ))}
             </TextField>
@@ -127,7 +124,7 @@ const Home = () => {
           ))}
         </Grid>
       </form>
-    
+
       <Stack spacing={2}>
         <Pagination
           count={totalPages}
@@ -135,7 +132,6 @@ const Home = () => {
           page={currentPage}
           onChange={handlePageChange}
         />
-       
       </Stack>
     </>
   );
