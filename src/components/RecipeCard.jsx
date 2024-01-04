@@ -15,13 +15,14 @@ export default function RecipeCard({ data }) {
   return (
     <Card>
       <CardActionArea
-        onClick={() => navigate("/dashboard/details", { state: data.recipe })}
+        onClick={() => navigate("/details", { state: data.recipe })}
       >
         <CardMedia
           component="img"
           height="300"
           image={image}
           alt="green iguana"
+          sx={{minWidth:"200px"}}
         />
         <CardContent sx={{textAlign:"center"}}>
           <Typography
@@ -50,7 +51,7 @@ export default function RecipeCard({ data }) {
             <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>|</Typography>
             <Typography >{ingredients.length}INGREDIENTS</Typography>
           </Stack>
-          <Button variant="text" color="success">See more</Button>
+          <Button variant="text" color="morcivert" sx={{fontSize:"1rem"}}>See more</Button>
         </CardContent>
       </CardActionArea>
     </Card>

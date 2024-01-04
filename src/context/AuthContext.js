@@ -122,7 +122,7 @@ const AuthContextProvider = ({ children }) => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         // Password reset email sent!
-        // toastSuccessNotify("Please check your email");
+       alert("Please check your email");
       })
       .catch((error) => {
         alert(error.message);

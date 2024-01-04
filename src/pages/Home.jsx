@@ -53,7 +53,6 @@ const Home = () => {
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
-    setRecipes([]);
     searchFood();
   };
 
@@ -70,11 +69,16 @@ const Home = () => {
   }, [currentPage]); // Include meal and search in the dependencies
 
   return (
-    <>
+    <Box bgcolor={"#E5E0FF"}>
       {loading ? (
-        <Box height={"100vh"} textAlign={"center"} margin={"auto"}>
+        <Box
+          height={"100vh"}
+          textAlign={"center"}
+          margin={"auto"}
+          paddingTop={"3rem"}
+        >
           {" "}
-          <img src={loadingImg} width={"50px"} height={"50px"} />
+          <img src={loadingImg} width={"80px"} height={"80px"} />
         </Box>
       ) : (
         <Box sx={{ textAlign: "center", paddingX: "10rem" }}>
@@ -82,7 +86,7 @@ const Home = () => {
             <Stack
               flexDirection={"row"}
               gap={"2rem"}
-              margin={"3rem"}
+              padding={"3rem"}
               justifyContent={"center"}
               alignItems="flex-end"
               sx={{ flexWrap: "wrap" }}
@@ -133,9 +137,9 @@ const Home = () => {
               ))}
             </Grid>
           </form>
-          <Stack margin={"3rem"} flexDirection={"row"} justifyContent="center">
+          <Stack padding={"3rem"} flexDirection={"row"} justifyContent="center">
             <Pagination
-              count={totalPages}
+              count={20}
               color="secondary"
               page={currentPage}
               onChange={handlePageChange}
@@ -143,7 +147,7 @@ const Home = () => {
           </Stack>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

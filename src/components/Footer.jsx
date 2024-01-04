@@ -8,27 +8,27 @@ import { Stack } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box  bgcolor={"#f7ede2"}>
+    <Box  bgcolor={"#F2F1EB"}>
       <Box
         height={"20vh"}
-        bgcolor={"#f7ede2"}
+        bgcolor={"#F2F1EB"}
         textAlign={"center"}
         padding={"2rem"}
       >
         <Stack
-          bgcolor={"#f7ede2"}
+          bgcolor={"#F2F1EB"}
           alignItems={"center"}
           justifyContent={"center"}
           flexDirection={"column"}
           margin={"auto"}
         >
           <img src={logo} alt="" width={"150px"} height={"150px"} />
-          <Box  bgcolor={"#f7ede2"}>
+          <Box  bgcolor={"#F2F1EB"}>
             <InstagramIcon fontSize="large" />
             <FacebookIcon fontSize="large" />
             <TwitterIcon fontSize="large" />
           </Box>
-          <Typography bgcolor={"#f7ede2"} >
+          <Typography bgcolor={"#F2F1EB"} >
             © Copyright by zlhshn 2024
           </Typography>
         </Stack>

@@ -60,10 +60,11 @@ const Main = () => {
                 onClick={() => navigate("/login")}
                 variant="contained"
                 width="300px"
+                size="large"
               >
                 SİGN İN
               </Button>
-              <Button onClick={() => navigate("/register")} variant="outlined">
+              <Button onClick={() => navigate("/register")} variant="outlined" size="large">
                 SİGN UP
               </Button>
             </Stack>
