@@ -12,13 +12,13 @@ import Button from "@mui/material/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import avatar from "../assets/icons/avatar.png";
 
 
-const pages = ["home", "about", "contact"];
+
+const pages = ["home", "blog", "contact"];
 
 
 
@@ -46,10 +46,17 @@ function ResponsiveAppBar() {
   const navigate = useNavigate()
 
   return (
+    <>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          {/* <RestaurantIcon
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              color: "#88BF6F",
+            }}
+          /> */}
           <Typography
             variant="h6"
             noWrap
@@ -61,11 +68,11 @@ function ResponsiveAppBar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#FBCE3A",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Recipe
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -100,9 +107,8 @@ function ResponsiveAppBar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <NavLink
-                    style={{ my: 2, color: "black", textDecoration: "none" }}
                     to={`/${page}`}
-                    textAlign="center"
+                    style={{ textAlign: "center", textDecoration: "none" }}
                   >
                     {page.toUpperCase()}
                   </NavLink>
@@ -110,7 +116,13 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          {/* <RestaurantIcon
+            sx={{
+              display: { xs: "flex", md: "none" },
+              mr: 1,
+              color: "#88BF6F",
+            }}
+          /> */}
           <Typography
             variant="h5"
             noWrap
@@ -123,11 +135,11 @@ function ResponsiveAppBar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#FBCE3A",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Recipe
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -137,10 +149,10 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 style={{
                   my: 2,
-                  color: "white",
+                  color: "black",
                   display: "block",
-                  marginRight: "1rem",
                   textDecoration: "none",
+                  marginRight: "1rem",
                 }}
               >
                 {page.toUpperCase()}
@@ -148,17 +160,14 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           {currentUser && (
-                <Typography marginRight={"2rem"} className="mr-2 capitalize">{currentUser?.displayName} </Typography>
-              )}
+              <Typography marginRight={2} >{currentUser?.displayName} </Typography>
+            )}
           <Box sx={{ flexGrow: 0 }}>
-        
-            <Tooltip title="Open settings">
-          
+           <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp"  src={currentUser?.photoURL || avatar} />
+                <Avatar alt="Remy Sharp" src={currentUser?.photoURL || avatar} />
               </IconButton>
             </Tooltip>
-           
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -175,27 +184,28 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {currentUser && (
+              {currentUser ? (
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"  onClick={logOut}>LOGOUT</Typography>
+                  <Typography textAlign="center" onClick={logOut}>LogOut</Typography>
                 </MenuItem>
-              )}
-              {!currentUser && (
-                <>
-              
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography onClick={()=>navigate("/login")} textAlign="center">LOGİN</Typography>
+              ) : (
+                  <>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" onClick={()=>navigate("/login")}>Log in</Typography>
                   </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography onClick={()=>navigate("/register")}  textAlign="center">REGİSTER</Typography>
-                  </MenuItem>
+                  <Typography textAlign="center" onClick={()=>navigate("/register")}>Register</Typography>                    
+                </MenuItem>
                 </>
               )}
             </Menu>
           </Box>
+         
         </Toolbar>
       </Container>
     </AppBar>
+    {/* <Box height={"50px"}> </Box> */}
+  </>
   );
 }
 export default ResponsiveAppBar;

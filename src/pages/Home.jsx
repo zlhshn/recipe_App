@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import { FormControl, Grid, Stack, Typography } from "@mui/material";
+import { Box, FormControl, Grid, Stack, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import Pagination from "@mui/material/Pagination";
-
+import { Container } from "@mui/material";
+import loadingImg from "../assets/img/loading.gif";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -15,15 +16,15 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [nextPageLink, setNextPageLink] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const API_ID = process.env.REACT_APP_API_ID;
   const API_KEY = process.env.REACT_APP_API_KEY;
-
+  let requestUrl = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}&from=${
+    (currentPage - 1) * 10
+  }&to=${currentPage * 10}`;
   const searchFood = async () => {
-    let requestUrl = `https://api.edamam.com/search?q=${search}&app_id=${API_ID}&app_key=${API_KEY}&mealType=${meal}&from=${
-      (currentPage - 1) * 10
-    }&to=${currentPage * 10}`;
-
+    setLoading(true);
     try {
       const res = await axios(requestUrl);
       setRecipes(res.data.hits);
@@ -40,6 +41,7 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -69,61 +71,78 @@ const Home = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <Stack
-          flexDirection={"row"}
-          gap={"2rem"}
-          margin={"3rem"}
-          justifyContent={"center"}
-        >
-          <div>
-            <TextField
-              id="standard-basic"
-              label="Search"
-              variant="standard"
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div>
-            <Button variant="outlined" type="submit">
-              Outlined
-            </Button>
-          </div>
-          <div>
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              value={meal}
-              onChange={(e) => setMeal(e.target.value)}
-              helperText="Please select your meal"
+      {loading ? (
+        <Box height={"100vh"} textAlign={"center"} margin={"auto"}>
+          {" "}
+          <img src={loadingImg} width={"50px"} height={"50px"} />
+        </Box>
+      ) : (
+        <Box sx={{ textAlign: "center", paddingX: "10rem" }}>
+          <form onSubmit={handleSubmit}>
+            <Stack
+              flexDirection={"row"}
+              gap={"2rem"}
+              margin={"3rem"}
+              justifyContent={"center"}
+              alignItems="flex-end"
+              sx={{ flexWrap: "wrap" }}
             >
-              {mealTy.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  <Typography>{option.value}</Typography>
-                </MenuItem>
+              <div>
+                <TextField
+                  id="standard-basic"
+                  label="Search"
+                  variant="standard"
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+
+              <div>
+                <TextField
+                  id="outlined-select-currency"
+                  select
+                  label="Select"
+                  value={meal}
+                  onChange={(e) => setMeal(e.target.value)}
+                  size="small"
+                  sx={{
+                    width: {
+                      xs: "200px", // Ekran boyutu < 600px
+                    },
+                  }}
+                >
+                  {mealTy.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.value}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+              <div>
+                <Button variant="contained" type="submit" size="large">
+                  Search
+                </Button>
+              </div>
+            </Stack>
+            <Grid container spacing={3} justifyContent="center">
+              {recipes.map((data) => (
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <RecipeCard key={data.recipe.label} data={data} />
+                </Grid>
               ))}
-            </TextField>
-          </div>
-        </Stack>
-
-        <Grid container>
-          {recipes.map((data) => (
-            <RecipeCard key={data.recipe.label} data={data} />
-          ))}
-        </Grid>
-      </form>
-
-      <Stack spacing={2}>
-        <Pagination
-          count={totalPages}
-          color="secondary"
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-      </Stack>
+            </Grid>
+          </form>
+          <Stack margin={"3rem"} flexDirection={"row"} justifyContent="center">
+            <Pagination
+              count={totalPages}
+              color="secondary"
+              page={currentPage}
+              onChange={handlePageChange}
+            />
+          </Stack>
+        </Box>
+      )}
     </>
   );
 };

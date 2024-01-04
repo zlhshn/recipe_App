@@ -8,29 +8,73 @@ import { Stack } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box
-      height={"20vh"}
-      bgcolor={"#f7ede2"}
-      textAlign={"center"}
-      padding={"2rem"}
-    >
-      <Stack
+    <Box  bgcolor={"#f7ede2"}>
+      <Box
+        height={"20vh"}
         bgcolor={"#f7ede2"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        flexDirection={"column"}
-        margin={"auto"}
+        textAlign={"center"}
+        padding={"2rem"}
       >
-        <img src={logo} alt="" width={"150px"} height={"150px"}/>
-        <div>
-          <InstagramIcon fontSize="large" />
-          <FacebookIcon fontSize="large" />
-          <TwitterIcon fontSize="large" />
-        </div>
-        <Typography bgcolor={"#f7ede2"} padding={"2rem"}>
-          © copyright by zlhshn 2024
-        </Typography>
-      </Stack>
+        <Stack
+          bgcolor={"#f7ede2"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          flexDirection={"column"}
+          margin={"auto"}
+        >
+          <img src={logo} alt="" width={"150px"} height={"150px"} />
+          <Box  bgcolor={"#f7ede2"}>
+            <InstagramIcon fontSize="large" />
+            <FacebookIcon fontSize="large" />
+            <TwitterIcon fontSize="large" />
+          </Box>
+          <Typography bgcolor={"#f7ede2"} >
+            © Copyright by zlhshn 2024
+          </Typography>
+        </Stack>
+      </Box>
+
+      {/* <>
+        <Stack
+          direction="column"
+          position="fixed"
+          bottom="20rem"
+          left="2rem"
+          spacing={2}
+          color="black"
+        >
+          <TwitterIcon
+            sx={{
+              fontSize: "2rem",
+              "&:hover": { color: "#88BF6F", fontSize: "3rem" },
+              transition: "all 1s",
+            }}
+          />
+          <FacebookIcon
+            sx={{
+              fontSize: "2rem",
+              "&:hover": { color: "#88BF6F", fontSize: "3rem" },
+              transition: "all 1s",
+            }}
+          />
+          <InstagramIcon
+            sx={{
+              fontSize: "2rem",
+              "&:hover": { color: "#88BF6F", fontSize: "3rem" },
+              transition: "all 1s",
+            }}
+          />
+        </Stack>
+        <Box
+          position="fixed"
+          bottom="8rem"
+          left="2rem"
+          sx={{ writingMode: "vertical-rl" }}
+          color="black"
+        >
+          &copy; Copyright 2024
+        </Box>
+      </> */}
     </Box>
   );
 }
