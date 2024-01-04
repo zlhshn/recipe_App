@@ -7,6 +7,7 @@ I aimed to develop a multi-page web application using react and react router. I 
 [LİVE](https://recipe-app-zlh.vercel.app/)
 
 
+![recipe](./recipe.gif)
 
 
 ## Tech/framework/method used
