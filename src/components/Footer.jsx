@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <Box  bgcolor={"#F2F1EB"}>
       <Box
-        height={"20vh"}
+        // height={"20vh"}
         bgcolor={"#F2F1EB"}
         textAlign={"center"}
         padding={"2rem"}

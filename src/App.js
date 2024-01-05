@@ -1,8 +1,8 @@
-import { ToastContainer } from "react-toastify";
+
 import AppRouter from "./router/AppRouter";
 import AuthContextProvider from "./context/AuthContext";
 import { createTheme, ThemeProvider } from "@mui/material"
-import { deepOrange, teal, deepPurple } from "@mui/material/colors"
+import { teal, deepPurple } from "@mui/material/colors"
 
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
         <ThemeProvider theme={theme}>
       <AuthContextProvider>
         <AppRouter />
-        <ToastContainer />
+    
       </AuthContextProvider>
       </ThemeProvider>
     </div>

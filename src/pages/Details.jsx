@@ -21,10 +21,11 @@ const Details = () => {
       <Stack
         padding={4}
         sx={{
-          width: "70%",
+          width:{xs:"100%", sm:"100%",md:"70%" } ,
           boxShadow: "0 5px 15px rgba(0, 0, 0, 0.4)",
           marginTop: "2rem",
           marginBottom: "2rem",
+         
         }}
         justifyContent={"center"}
         alignItems={"center"}

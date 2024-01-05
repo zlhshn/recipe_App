@@ -13,16 +13,17 @@ export default function RecipeCard({ data }) {
   const navigate = useNavigate();
 
   return (
-    <Card>
+    <Card  >
       <CardActionArea
         onClick={() => navigate("/details", { state: data.recipe })}
       >
         <CardMedia
           component="img"
+         
           height="300"
           image={image}
-          alt="green iguana"
-          sx={{minWidth:"200px"}}
+          alt={label}
+         
         />
         <CardContent sx={{textAlign:"center"}}>
           <Typography

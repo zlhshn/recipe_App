@@ -12,7 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toastErrorNotify, toastSuccessNotify } from "../helpers/ToastNotify";
+
 
 export const AuthContext = createContext();
 // const {Provider} = createContext()

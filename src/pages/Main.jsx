@@ -12,21 +12,16 @@ const Main = () => {
   return (
     <>
       <Box
+    
         component={"div"}
         sx={{
           backgroundColor: "#F2EEAE",
-          // backgroundImage: `url(${BackImg})`,
           textAlign: "center",
-          height: "80vh",
-          // backgroundSize: "cover",
-          // backgroundPosition: "right",
-          // backgroundRepeat: "no-repeat",
-          // objectFit: "cover",
-          // width: "100%",
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
           alignItems: "center",
+          paddingY:"6rem"
         }}
       >
         <Stack
@@ -34,47 +29,59 @@ const Main = () => {
           justifyContent={"center"}
           alignItems={"center"}
           gap={"2rem"}
+          paddingY={"4rem"}
+          paddingLeft={"1rem"}
+         
         >
           <Typography
             component={"h1"}
             variant="h3"
             fontWeight={"700"}
             color={"rebeccapurple"}
+            paddingLeft={"2rem"}
+           
           >
             Welcome to our page.
           </Typography>
 
           <Typography
             component={"h1"}
-            variant="h3"
+            variant={"h4"}
             fontWeight={"900"}
             color={"#BF5E70"}
             flexWrap={"wrap"}
+           
           >
             Discover delicious and enjoyable recipes with us{" "}
           </Typography>
 
           <div>
-            <Stack flexDirection={"row"} gap={"2rem"}>
+            <Stack flexDirection={"row"} gap={ "1rem"}  >
               <Button
                 onClick={() => navigate("/login")}
                 variant="contained"
-                width="300px"
                 size="large"
+              
               >
                 SİGN İN
               </Button>
-              <Button onClick={() => navigate("/register")} variant="outlined" size="large">
+              <Button
+                onClick={() => navigate("/register")}
+                variant="outlined"
+                size="large"
+              >
                 SİGN UP
               </Button>
             </Stack>
           </div>
         </Stack>
-        <img src={rsm1} width={"430px"} height={"430px"} />
+        <Box  >
+          <img src={rsm1} width={"30%"} style={{ minWidth: "100px" }} />
+        </Box>
       </Box>
       <Box
         sx={{
-          height: "50vh",
+          // height: "50vh",
           backgroundColor: "#FFCB9A",
           backgroundSize: "cover",
         }}
@@ -85,8 +92,9 @@ const Main = () => {
           alignItems={"center"}
           gap={"5rem"}
           flexDirection={"row"}
+          paddingRight={"1rem"}
         >
-          <img src={rsm2} width={"330px"} height={"330px"} />
+          <img src={rsm2} width={"20%"} style={{ minWidth: "80px" }} />
           <Typography
             component={"h1"}
             variant="h3"

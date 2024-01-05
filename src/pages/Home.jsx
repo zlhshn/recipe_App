@@ -98,6 +98,11 @@ const Home = () => {
                   variant="standard"
                   type="search"
                   value={search}
+                  sx={{
+                    width: {
+                      xs: "200px", // Ekran boyutu < 600px
+                    },
+                  }}
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
@@ -129,9 +134,9 @@ const Home = () => {
                 </Button>
               </div>
             </Stack>
-            <Grid container spacing={3} justifyContent="center">
+            <Grid container spacing={3} justifyContent="center" alignItems={"center"}>
               {recipes.map((data) => (
-                <Grid item xs={12} sm={6} md={4} lg={3}>
+                <Grid item xs={12} sm={6} md={4} lg={3} minWidth={"300px"}>
                   <RecipeCard key={data.recipe.label} data={data} />
                 </Grid>
               ))}
