@@ -20,7 +20,7 @@ const Details = () => {
       <Stack
         padding={3}
         sx={{
-          width: "70%",
+          width: "80%",
           boxShadow: "0 5px 15px rgba(0, 0, 0, 0.4)",
           marginTop: "2rem",
           marginBottom: "2rem",
@@ -33,7 +33,7 @@ const Details = () => {
         <Stack flexDirection={"row"} sx={{ width: "100%" }}>
           <CardMedia
             component="img"
-            // height="350px"
+            height="350px"
             sx={{ width: "50%", borderRadius: "2rem" }}
             image={image}
             alt={label}
