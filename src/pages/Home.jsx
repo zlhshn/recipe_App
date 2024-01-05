@@ -11,7 +11,7 @@ import loadingImg from "../assets/img/loading.gif";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
-  const [meal, setMeal] = useState("Breakfast"); // Make sure the initial meal type matches the options
+  const [meal, setMeal] = useState("Brunch"); // Make sure the initial meal type matches the options
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
