@@ -11,7 +11,6 @@ const Details = () => {
     dishType,
     cuisineType,
     ingredientLines,
-    shareAs,
     totalNutrients: { FAT, CHOCDF, CHOLE, PROCNT, NA, CA, MG },
   } = data;
   console.log(data);
@@ -23,8 +22,8 @@ const Details = () => {
         sx={{
           width:{xs:"100%", sm:"100%",md:"70%" } ,
           boxShadow: "0 5px 15px rgba(0, 0, 0, 0.4)",
-          marginTop: "2rem",
-          marginBottom: "2rem",
+          paddingTop: "2rem",
+          paddingBottom: "2rem",
          
         }}
         justifyContent={"center"}
