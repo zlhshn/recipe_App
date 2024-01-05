@@ -37,7 +37,7 @@ export default function About() {
       <Container>
         <Grid container spacing={3} padding={"4rem"} justifyContent="center">
           {data?.map(({ image, desc, date, name, avatar, renk }) => (
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3} minWidth={"300px"}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardHeader
                   height={"4rem"}
