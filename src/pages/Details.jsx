@@ -18,13 +18,13 @@ const Details = () => {
   return (
     <Box height={"auto"}>
       <Stack
-        padding={4}
+        padding={3}
         sx={{
-          width:{xs:"100%", sm:"100%",md:"70%" } ,
+          width: "70%",
           boxShadow: "0 5px 15px rgba(0, 0, 0, 0.4)",
-          paddingTop: "2rem",
-          paddingBottom: "2rem",
-         
+          marginTop: "2rem",
+          marginBottom: "2rem",
+          borderRadius:"2rem"
         }}
         justifyContent={"center"}
         alignItems={"center"}
@@ -33,26 +33,39 @@ const Details = () => {
         <Stack flexDirection={"row"} sx={{ width: "100%" }}>
           <CardMedia
             component="img"
-            height="350px"
+            // height="350px"
             sx={{ width: "50%", borderRadius: "2rem" }}
             image={image}
             alt={label}
-            
           />
           <Box sx={{ width: "50%", marginLeft: "3rem" }}>
-            <Typography variant="h4" marginBottom={"2rem"} color={"plum"} fontWeight={"bold"} fontStyle={"italic"}>
+            <Typography
+              variant="h4"
+              marginBottom={"2rem"}
+              color={"plum"}
+              fontWeight={"bold"}
+              fontStyle={"italic"}
+            >
               {label}
             </Typography>
-            <Typography marginBottom={"1rem"} fontWeight={"bold"} color={"lightgreen"} >
+            <Typography
+              paddingBottom={"1rem"}
+              fontWeight={"bold"}
+              color={"lightgreen"}
+            >
               DishType :
               <Typography variant="span" color="#494545">
                 {dishType}
               </Typography>
             </Typography>
-            <Typography marginBottom={"1rem"} fontWeight={"bold"} color={"lightgreen"}>
+            <Typography
+              marginBottom={"1rem"}
+              fontWeight={"bold"}
+              color={"lightgreen"}
+            >
               CuisineType :
               <Typography variant="span" color="#494545">
-                 {cuisineType}
+                {cuisineType}
               </Typography>
             </Typography>
           </Box>
