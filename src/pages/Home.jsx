@@ -144,7 +144,7 @@ const Home = () => {
           </form>
           <Stack padding={"3rem"} flexDirection={"row"} justifyContent="center">
             <Pagination
-              count={20}
+              count={10}
               color="secondary"
               page={currentPage}
               onChange={handlePageChange}
