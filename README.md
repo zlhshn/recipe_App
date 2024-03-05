@@ -1,6 +1,7 @@
 ## Recipe App
 ## PROJECT AİM
-I aimed to develop a multi-page web application using react and react router. I also performed authentication using firebase.
+I aimed to develop a multi-page web application using react and react router. Page access in the project was made using firebase authentication.
+Recipes can be searched, filtered and their details can be viewed.
 
 
 ##  Live Link
